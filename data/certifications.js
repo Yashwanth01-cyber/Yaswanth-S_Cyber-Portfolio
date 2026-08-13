@@ -1,5 +1,4 @@
 export const certifications = [
-
   // ==========================
   // Cybersecurity Certifications
   // ==========================
@@ -11,6 +10,7 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/CLLMSP.pdf',
     status: 'Completed',
+    type: 'Certification',
   },
 
   {
@@ -20,6 +20,7 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/CCEP.pdf',
     status: 'Completed',
+    type: 'Certification',
   },
 
   {
@@ -29,6 +30,7 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/Ethical Hacking for Beginners.jpg',
     status: 'Completed',
+    type: 'Certification',
   },
 
   {
@@ -38,6 +40,7 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/Cybersecurity Awareness-Hp.pdf',
     status: 'Completed',
+    type: 'Certification',
   },
 
   {
@@ -47,6 +50,7 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/Network security Foundation.jpg',
     status: 'Completed',
+    type: 'Certification',
   },
 
   {
@@ -56,10 +60,11 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/NPTEL-IoT.jpg',
     status: 'Completed',
+    type: 'Certification',
   },
 
   // ==========================
-  // Internships & Training
+  // Internships
   // ==========================
 
   {
@@ -69,6 +74,7 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/Elevates-lab.png',
     status: 'Completed',
+    type: 'Internship',
   },
 
   {
@@ -78,15 +84,23 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/Navodita-Infotech.pdf',
     status: 'Completed',
+    type: 'Internship',
   },
+
   {
-    name: 'CyberSecurity Internship',
+    name: 'Cybersecurity Internship',
     issuer: 'Vault-Tac Security',
     date: '2026',
     credentialId: 'Available on Certificate',
     url: '/Vault-Tac security.pdf',
     status: 'Completed',
+    type: 'Internship',
   },
+
+  // ==========================
+  // Training
+  // ==========================
+
   {
     name: 'Ethical Hacking Training',
     issuer: 'GUVI',
@@ -94,10 +108,11 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/Guvi.jpg',
     status: 'Completed',
+    type: 'Training',
   },
 
   // ==========================
-  // Professional Experience Programs
+  // Professional Programs
   // ==========================
 
   {
@@ -107,6 +122,7 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/CyberSecurity-Analyst TATA.pdf',
     status: 'Completed',
+    type: 'Job Simulation',
   },
 
   {
@@ -116,6 +132,7 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/Mastercards.pdf',
     status: 'Completed',
+    type: 'Job Simulation',
   },
 
   {
@@ -125,15 +142,17 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/Common Wealth Bank.pdf',
     status: 'Completed',
+    type: 'Job Simulation',
   },
 
   {
     name: 'Security Job Simulation',
-    issuer: 'Vault-Tec Security',
+    issuer: 'Vault-Tac Security',
     date: '2026',
     credentialId: 'Available on Certificate',
     url: '/Vault-Tac security.pdf',
     status: 'Completed',
+    type: 'Job Simulation',
   },
 
   {
@@ -143,6 +162,7 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/Solutions Architecture.pdf',
     status: 'Completed',
+    type: 'Professional Program',
   },
 
   {
@@ -152,6 +172,7 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/IBM-Frontend.jpg',
     status: 'Completed',
+    type: 'Professional Program',
   },
 
   {
@@ -161,20 +182,20 @@ export const certifications = [
     credentialId: 'Available on Certificate',
     url: '/walmart-globalTech.pdf',
     status: 'Completed',
+    type: 'Professional Program',
   },
-  
 
   // ==========================
   // Current Learning
   // ==========================
 
   {
-    name: 'PortSwigger Web Security Academy',
+    name: 'Web Security Academy',
     issuer: 'PortSwigger',
     date: '2026',
     credentialId: 'Learning in Progress',
     url: 'https://portswigger.net/web-security',
     status: 'In Progress',
+    type: 'Learning',
   },
-
 ];
