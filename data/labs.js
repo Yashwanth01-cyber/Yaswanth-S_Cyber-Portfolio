@@ -34,14 +34,14 @@ export const labs = {
       total: 13,
     },
     {
-      module: 'SQL Injection',
-      completed: 0,
-      total: 18,
-    },
-    {
       module: 'Authentication',
       completed: 0,
       total: 16,
+    },
+    {
+      module: 'SQL Injection',
+      completed: 0,
+      total: 18,
     },
     {
       module: 'Cross-Site Scripting (XSS)',

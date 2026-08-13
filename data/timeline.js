@@ -6,62 +6,74 @@ export const timeline = [
   },
 
   {
-    event: 'Linux Fundamentals (Intermediate)',
-    date: '',
+    event: 'Cybersecurity Internship Experience',
+    date: '2025',
+    icon: 'Briefcase',
+  },
+
+  {
+    event: 'Linux Fundamentals',
+    date: '2025',
     icon: 'Terminal',
   },
 
   {
-    event: 'Networking & TCP/IP (Intermediate)',
-    date: '',
+    event: 'Networking & TCP/IP Fundamentals',
+    date: '2025',
     icon: 'Network',
   },
 
   {
-    event: 'Nmap Reconnaissance (Intermediate)',
-    date: '',
+    event: 'Nmap Reconnaissance Practice',
+    date: '2026',
     icon: 'Radar',
   },
 
   {
-    event: 'Wireshark Packet Analysis (Beginner → Intermediate)',
-    date: '',
+    event: 'Wireshark Packet Analysis',
+    date: '2026',
     icon: 'Activity',
   },
 
   {
-    event: 'Burp Suite Fundamentals (Intermediate)',
-    date: '',
+    event: 'Burp Suite Web Security Practice',
+    date: '2026',
     icon: 'Bug',
   },
 
   {
-    event: 'Kali Linux (Intermediate)',
-    date: '',
+    event: 'Kali Linux Security Lab Environment',
+    date: '2026',
     icon: 'Shield',
   },
 
   {
-    event: 'Metasploit Framework (Beginner)',
-    date: '',
+    event: 'Metasploit Framework Fundamentals',
+    date: '2026',
     icon: 'Crosshair',
   },
 
   {
-    event: 'PortSwigger Access Control Labs (2 Labs Completed)',
-    date: '',
+    event: 'PortSwigger Access Control Labs — 2 Completed',
+    date: 'August 2026',
     icon: 'ShieldCheck',
   },
 
   {
-    event: 'SQL Injection (Currently Learning)',
-    date: '',
-    icon: 'Database',
+    event: 'SentinelX Cybersecurity Platform Development',
+    date: '2026',
+    icon: 'Shield',
   },
 
   {
     event: 'Cybersecurity Research & Technical Writing',
-    date: '',
+    date: '2026',
     icon: 'BookOpen',
+  },
+
+  {
+    event: 'SQL Injection & Web Application Security',
+    date: '',
+    icon: 'Database',
   },
 ];

@@ -37,6 +37,7 @@ export interface DbCertification {
   credentialId: string;
   url: string;
   status: string;
+  type: string;
 }
 
 export interface DbLab {
@@ -76,7 +77,9 @@ export interface DbBlogPost {
 export async function getProjects(): Promise<DbProject[]> {
   const { data, error } = await supabase
     .from('projects')
-    .select('slug, name, tagline, overview, technologies, features, architecture, github_url, live_demo_url, status, screenshots, sort_order')
+    .select(
+      'slug, name, tagline, overview, technologies, features, architecture, github_url, live_demo_url, status, screenshots, sort_order'
+    )
     .order('sort_order', { ascending: true });
 
   if (error || !data || data.length === 0) {
@@ -145,6 +148,7 @@ export async function getCertifications(): Promise<DbCertification[]> {
     credentialId: c.credentialId,
     url: c.url,
     status: c.status,
+    type: c.type || 'Certification',
   }));
 }
 
@@ -161,6 +165,7 @@ export async function getLabs() {
   const completed = (data as Array<Record<string, unknown>>).filter(
     (r) => r.status === 'Completed'
   );
+
   const recentActivity = completed.slice(0, 5).map((r) => ({
     title: r.title as string,
     module: r.module as string,
@@ -168,44 +173,72 @@ export async function getLabs() {
   }));
 
   const moduleMap = new Map<string, { completed: number; total: number }>();
+
   for (const r of data as Array<Record<string, unknown>>) {
     const mod = r.module as string;
-    if (!moduleMap.has(mod)) moduleMap.set(mod, { completed: 0, total: 0 });
+
+    if (!moduleMap.has(mod)) {
+      moduleMap.set(mod, {
+        completed: 0,
+        total: 0,
+      });
+    }
+
     const entry = moduleMap.get(mod)!;
+
     entry.total += 1;
-    if (r.status === 'Completed') entry.completed += 1;
+
+    if (r.status === 'Completed') {
+      entry.completed += 1;
+    }
   }
-  const moduleProgress = Array.from(moduleMap.entries()).map(([module, v]) => ({
-    module,
-    completed: v.completed,
-    total: v.total,
-  }));
+
+  const moduleProgress = Array.from(moduleMap.entries()).map(
+    ([module, v]) => ({
+      module,
+      completed: v.completed,
+      total: v.total,
+    })
+  );
 
   const latest = completed[0];
+
   const inProgress = (data as Array<Record<string, unknown>>).find(
     (r) => r.status === 'In Progress'
   );
 
   return {
     totalCompleted: completed.length,
+
     currentModule: inProgress
       ? ((inProgress as Record<string, unknown>).module as string)
       : (moduleProgress[0]?.module ?? staticLabs.currentModule),
+
     latestLab: latest
       ? {
           title: (latest as Record<string, unknown>).title as string,
           module: (latest as Record<string, unknown>).module as string,
-          date: ((latest as Record<string, unknown>).completed_at as string) || '',
+          date:
+            ((latest as Record<string, unknown>).completed_at as string) || '',
         }
       : staticLabs.latestLab,
+
     nextLab: inProgress
       ? {
           title: (inProgress as Record<string, unknown>).title as string,
           module: (inProgress as Record<string, unknown>).module as string,
         }
       : staticLabs.nextLab,
-    recentActivity: recentActivity.length > 0 ? recentActivity : staticLabs.recentActivity,
-    moduleProgress: moduleProgress.length > 0 ? moduleProgress : staticLabs.moduleProgress,
+
+    recentActivity:
+      recentActivity.length > 0
+        ? recentActivity
+        : staticLabs.recentActivity,
+
+    moduleProgress:
+      moduleProgress.length > 0
+        ? moduleProgress
+        : staticLabs.moduleProgress,
   };
 }
 
@@ -264,7 +297,9 @@ export async function getTimeline(): Promise<DbTimelineEvent[]> {
 export async function getBlogPosts(): Promise<DbBlogPost[]> {
   const { data, error } = await supabase
     .from('blog_posts')
-    .select('slug, title, excerpt, content, date, read_time, tags, published')
+    .select(
+      'slug, title, excerpt, content, date, read_time, tags, published'
+    )
     .eq('published', true)
     .order('date', { ascending: false });
 
@@ -291,14 +326,22 @@ export async function getBlogPosts(): Promise<DbBlogPost[]> {
   }));
 }
 
-export async function getBlogPostBySlug(slug: string): Promise<DbBlogPost | null> {
+export async function getBlogPostBySlug(
+  slug: string
+): Promise<DbBlogPost | null> {
   const posts = await getBlogPosts();
+
   return posts.find((p) => p.slug === slug) ?? null;
 }
 
-export async function insertContactMessage(name: string, email: string, message: string) {
+export async function insertContactMessage(
+  name: string,
+  email: string,
+  message: string
+) {
   const { error } = await supabase
     .from('contact_messages')
     .insert({ name, email, message });
+
   return { error };
 }
