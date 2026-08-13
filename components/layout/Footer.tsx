@@ -47,7 +47,7 @@ export function Footer() {
         </div>
 
         <p className="mt-6 text-center text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} {profile.name}. Built with Next.js, Tailwind CSS, and Framer Motion.
+          &copy; {new Date().getFullYear()} {profile.name}.
         </p>
       </div>
     </footer>
