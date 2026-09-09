@@ -1,0 +1,120 @@
+﻿ Send and observe whether the server returns a SQL error.
+
+If you see an error, you may have found an injection point. Report it responsibly.
+
+## Next steps
+
+- Explore the Web Security Academy labs that map to Burp workflows.
+- Learn to use Match & Replace rules for automation.
+- Practice reading HTTP responses carefully â€” details reveal vulnerabilities.
+
+Burp Suite rewards patience. Spend time understanding raw HTTP, and the tool becomes an extension of your own testing instincts.
+
+
+========================================
+SOURCE: .\content\blog\understanding-owasp-top-10.md
+========================================
+# Understanding the OWASP Top 10
+
+The OWASP Top 10 is a standard awareness document that outlines the most critical security risks to web applications. It is updated regularly by the Open Worldwide Application Security Project (OWASP) community based on real-world incident data.
+
+## Why it matters
+
+Every developer and security professional should understand these categories. They represent the most common ways attackers compromise web applications, and addressing them covers a large portion of common attack surface.
+
+## The categories
+
+1. **Broken Access Control** â€” Users access resources or perform actions outside their intended permissions.
+2. **Cryptographic Failures** â€” Sensitive data exposed due to weak or missing encryption.
+3. **Injection** â€” Untrusted data sent to an interpreter, such as SQL injection.
+4. **Insecure Design** â€” Missing security controls at the architecture level.
+5. **Security Misconfiguration** â€” Default settings, verbose errors, or unnecessary features enabled.
+6. **Vulnerable and Outdated Components** â€” Using libraries with known vulnerabilities.
+7. **Identification and Authentication Failures** â€” Weak credential handling and session management.
+8. **Software and Data Integrity Failures** â€” Untrusted CI/CD pipelines and unsigned updates.
+9. **Security Logging and Monitoring Failures** â€” Missing or insufficient audit trails.
+10. **Server-Side Request Forgery (SSRF)** â€” Server-side requests manipulated by an attacker.
+
+## How to defend
+
+- Enforce least privilege and deny-by-default access control.
+- Validate and sanitize all input at trust boundaries.
+- Keep dependencies updated and monitor advisories.
+- Implement centralized logging and alerting.
+
+Understanding the OWASP Top 10 is the foundation of secure coding. Start here, then go deeper into each category through PortSwigger's Web Security Academy labs.
+
+
+========================================
+SOURCE: .\components\sections\About.tsx
+========================================
+'use client';
+
+import { motion } from 'framer-motion';
+import { Target, BookOpen, Award } from 'lucide-react';
+import { profile } from '@/data/profile';
+import { SectionHeading } from '@/components/shared/SectionHeading';
+import { GlassCard } from '@/components/shared/GlassCard';
+
+export function About() {
+  return (
+    <section id="about" className="py-20">
+      <SectionHeading
+        title="About Me"
+        sub-title="My journey into cybersecurity and my career aspirations."
+      />
+
+      <div className="grid gap-6 lg:grid-cols-3">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          className="lg:col-span-2"
+        >
+          <GlassCard className="p-6 sm:p-8">
+            <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+              {profile.about.intro}
+            </p>
+
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+              {profile.about.body}
+            </p>
+          </GlassCard>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ delay: 0.1 }}
+        >
+          <GlassCard className="p-6 h-full">
+            <div className="flex items-center gap-2 mb-3">
+              <Target className="h-5 w-5 text-emerald-400" />
+              <h3 className="text-sm font-semibold text-foreground">
+                Career Goal
+              </h3>
+            </div>
+
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {profile.about.careerGoal}
+            </p>
+          </GlassCard>
+        </motion.div>
+      </div>
+
+      <div className="mt-6 grid gap-6 md:grid-cols-3">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+        >
+          <GlassCard className="p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <BookOpen className="h-5 w-5 text-blue-400" />
+              <h3 className="text-sm font-semibold text-foreground">
+                Current Focus
+              </h3>
+            </div>
+
+    

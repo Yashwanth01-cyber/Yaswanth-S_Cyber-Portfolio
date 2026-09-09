@@ -1,0 +1,133 @@
+﻿        Architecture
+                            </h4>
+                          </div>
+                          <p className="text-sm leading-6 text-muted-foreground">
+                            {project.architecture}
+                          </p>
+                        </div>
+
+                        <div>
+                          <h4 className="mb-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                            Features
+                          </h4>
+                          <ul className="space-y-2">
+                            {project.features.map((feature) => (
+                              <li
+                                key={feature}
+                                className="flex items-start gap-2 text-sm leading-6 text-muted-foreground"
+                              >
+                                <CheckCircle2 className="mt-1 h-3.5 w-3.5 shrink-0 text-cyan-300" />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <div className="mt-auto flex items-center gap-4 border-t border-border/30 pt-5">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-cyan-300"
+                  >
+                    <Github className="h-4 w-4" />
+                    GitHub
+                  </a>
+
+                  <a
+                    href={project.liveDemo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      'inline-flex items-center gap-1.5 text-xs font-medium',
+                      project.liveDemo === '#'
+                        ? 'pointer-events-none text-muted-foreground/40'
+                        : 'text-muted-foreground transition-colors hover:text-cyan-300'
+                    )}
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Live Demo
+                  </a>
+
+                  <span className="ml-auto hidden items-center gap-1 font-mono text-[9px] uppercase tracking-wider text-muted-foreground/40 sm:flex">
+                    system
+                    <ArrowUpRight className="h-3 w-3" />
+                  </span>
+                </div>
+              </div>
+            </motion.article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+
+
+========================================
+SOURCE: .\components\sections\Experience.tsx
+========================================
+'use client';
+
+import { motion } from 'framer-motion';
+import { Briefcase, Calendar } from 'lucide-react';
+import { SectionHeading } from '@/components/shared/SectionHeading';
+import { GlassCard } from '@/components/shared/GlassCard';
+import type { DbExperience } from '@/lib/data';
+
+interface ExperienceProps {
+  experiences: DbExperience[];
+}
+
+export function Experience({ experiences }: ExperienceProps) {
+  return (
+    <section
+      id="experience"
+      className="mx-auto max-w-6xl px-4 py-20 sm:px-6"
+    >
+      <SectionHeading
+        eyebrow="internships"
+        title="Internships"
+        description="Hands-on experience across cybersecurity, security testing, and analysis."
+      />
+
+      <div className="relative">
+        {/* Timeline line */}
+        <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-500/40 via-border to-transparent sm:left-1/2" />
+
+        <div className="space-y-8">
+          {experiences.map((exp, i) => (
+            <motion.div
+              key={`${exp.company}-${exp.role}`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ delay: i * 0.1 }}
+              className={`relative pl-12 sm:pl-0 ${
+                i % 2 === 0
+                  ? 'sm:pr-[55%]'
+                  : 'sm:pl-[55%]'
+              }`}
+            >
+              {/* Timeline marker */}
+              <div
+                className={`absolute left-4 top-2 -translate-x-1/2 sm:left-1/2 ${
+                  i % 2 === 0
+                    ? 'sm:left-[45%] sm:translate-x-1/2'
+                    : 'sm:-translate-x-1/2'
+                }`}
+              >
+                <span className="flex h-3 w-3 rounded-full bg-emerald-500 ring-4 ring-emerald-500/20" />
+              </div>
+
+              <GlassCard className="p-5">
+                {/* Role */}
+                <div className="mb-1 flex items-center gap-2">
+                  <Briefcase className="h-4 w-4 text-emerald-400" />
+
+                  <h3 classNam

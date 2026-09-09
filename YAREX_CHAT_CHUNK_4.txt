@@ -1,0 +1,229 @@
+﻿jpg',
+    status: 'Completed',
+    type: 'Professional Program',
+  },
+
+  {
+    name: 'Global Technology Program',
+    issuer: 'Walmart Global Tech',
+    date: '2026',
+    credentialId: 'Available on Certificate',
+    url: '/walmart-globalTech.pdf',
+    status: 'Completed',
+    type: 'Professional Program',
+  },
+
+  // ==========================
+  // Current Learning
+  // ==========================
+
+  {
+    name: 'Web Security Academy',
+    issuer: 'PortSwigger',
+    date: '2026',
+    credentialId: 'Learning in Progress',
+    url: 'https://portswigger.net/web-security',
+    status: 'In Progress',
+    type: 'Learning',
+  },
+];
+
+========================================
+SOURCE: .\data\labs.js
+========================================
+export const labs = {
+  totalCompleted: 2,
+
+  currentModule: 'Access Control',
+
+  latestLab: {
+    title: 'Unprotected Admin Functionality with Unpredictable URL',
+    module: 'Access Control',
+    date: 'August 2026',
+  },
+
+  nextLab: {
+    title: 'User Role Controlled by Request Parameter',
+    module: 'Access Control',
+  },
+
+  recentActivity: [
+    {
+      title: 'Unprotected Admin Functionality',
+      module: 'Access Control',
+      date: 'August 2026',
+    },
+    {
+      title: 'Unprotected Admin Functionality with Unpredictable URL',
+      module: 'Access Control',
+      date: 'August 2026',
+    },
+  ],
+
+  moduleProgress: [
+    {
+      module: 'Access Control',
+      completed: 2,
+      total: 13,
+    },
+    {
+      module: 'Authentication',
+      completed: 0,
+      total: 16,
+    },
+    {
+      module: 'SQL Injection',
+      completed: 0,
+      total: 18,
+    },
+    {
+      module: 'Cross-Site Scripting (XSS)',
+      completed: 0,
+      total: 30,
+    },
+    {
+      module: 'Cross-Site Request Forgery (CSRF)',
+      completed: 0,
+      total: 12,
+    },
+    {
+      module: 'Server-Side Request Forgery (SSRF)',
+      completed: 0,
+      total: 8,
+    },
+  ],
+};
+
+========================================
+SOURCE: .\data\research.js
+========================================
+export const research = [
+  {
+    slug: 'sentinelx',
+    title: 'SentinelX Research Paper',
+    abstract:
+      'A study of automated vulnerability assessment workflows, evaluating accuracy, coverage, and reporting quality across common open-source scanning tools combined into a unified pipeline.',
+    status: 'Writing',
+    progress: 35,
+    date: '2026',
+    authors: ['Yaswanth S'],
+    tags: ['Vulnerability Assessment', 'Automation', 'Offensive Security'],
+  },
+];
+
+
+========================================
+SOURCE: .\data\timeline.js
+========================================
+export const timeline = [
+  {
+    event: 'Started Cybersecurity Journey',
+    date: 'April 2025',
+    icon: 'Rocket',
+  },
+
+  {
+    event: 'Cybersecurity Internship Experience',
+    date: '2025',
+    icon: 'Briefcase',
+  },
+
+  {
+    event: 'Linux Fundamentals',
+    date: '2025',
+    icon: 'Terminal',
+  },
+
+  {
+    event: 'Networking & TCP/IP Fundamentals',
+    date: '2025',
+    icon: 'Network',
+  },
+
+  {
+    event: 'Nmap Reconnaissance Practice',
+    date: '2026',
+    icon: 'Radar',
+  },
+
+  {
+    event: 'Wireshark Packet Analysis',
+    date: '2026',
+    icon: 'Activity',
+  },
+
+  {
+    event: 'Burp Suite Web Security Practice',
+    date: '2026',
+    icon: 'Bug',
+  },
+
+  {
+    event: 'Kali Linux Security Lab Environment',
+    date: '2026',
+    icon: 'Shield',
+  },
+
+  {
+    event: 'Metasploit Framework Fundamentals',
+    date: '2026',
+    icon: 'Crosshair',
+  },
+
+  {
+    event: 'PortSwigger Access Control Labs â€” 2 Completed',
+    date: 'August 2026',
+    icon: 'ShieldCheck',
+  },
+
+  {
+    event: 'SentinelX Cybersecurity Platform Development',
+    date: '2026',
+    icon: 'Shield',
+  },
+
+  {
+    event: 'Cybersecurity Research & Technical Writing',
+    date: '2026',
+    icon: 'BookOpen',
+  },
+
+  {
+    event: 'SQL Injection & Web Application Security',
+    date: '',
+    icon: 'Database',
+  },
+];
+
+========================================
+SOURCE: .\data\blogs.js
+========================================
+export const blogs = [
+  {
+    slug: 'understanding-owasp-top-10',
+    title: 'Understanding the OWASP Top 10',
+    excerpt: 'A practical walkthrough of the most critical web application security risks and how to defend against them.',
+    date: '2026-06-15',
+    readTime: '8 min',
+    tags: ['Web Security', 'OWASP'],
+  },
+  {
+    slug: 'burp-suite-for-beginners',
+    title: 'Burp Suite for Beginners',
+    excerpt: 'Getting started with Burp Suite: proxy configuration, interception, repeater, and your first manual test.',
+    date: '2026-05-02',
+    readTime: '6 min',
+    tags: ['Tools', 'Burp Suite'],
+  },
+];
+
+
+========================================
+SOURCE: .\lib\site-config.ts
+========================================
+export const siteConfig = {
+  resumeFileName: 'Yaswanth_S_Cybersecurity_Resume.pdf',
+  name: 'Yaswanth S',
+  title: 'Offensive Security Learner | Future VAPT Engineer',
+  location: 'India',
+  email: 'yaswan

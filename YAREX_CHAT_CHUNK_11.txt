@@ -1,0 +1,143 @@
+﻿
+                  </span>
+                  <h3 className="text-sm font-semibold">{group.category}</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {group.items.map((item) => {
+                    const style = (levelStyles as Record<string, { label: string; className: string }>)[item.level];
+                    return (
+                      <div
+                        key={item.name}
+                        className="group relative inline-flex"
+                      >
+                        <span className="rounded-md border px-2.5 py-1 text-xs font-medium text-foreground">
+                          {item.name}
+                        </span>
+                        <span
+                          className={cn(
+                            'rounded-md border px-2.5 py-1 text-xs font-medium -ml-2',
+                            style?.className
+                          )}
+                        >
+                          {style?.label}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </GlassCard>
+            </motion.div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+
+========================================
+SOURCE: .\components\sections\Projects.tsx
+========================================
+'use client';
+
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Github,
+  ExternalLink,
+  ChevronDown,
+  Cpu,
+  CheckCircle2,
+  Loader2,
+  Shield,
+  Radar,
+  Activity,
+  Network,
+  ArrowUpRight,
+  Terminal,
+} from 'lucide-react';
+import { SectionHeading } from '@/components/shared/SectionHeading';
+import { cn } from '@/lib/utils';
+import type { DbProject } from '@/lib/data';
+import { ProjectVisual } from '@/components/sections/ProjectVisual';
+
+const statusStyles: Record<string, string> = {
+  'Active Development':
+    'text-cyan-300 bg-cyan-400/10 border-cyan-400/25',
+  Completed:
+    'text-emerald-300 bg-emerald-400/10 border-emerald-400/25',
+  'On Hold':
+    'text-muted-foreground bg-muted/20 border-border',
+};
+
+function isSentinelX(project: DbProject) {
+  const value = `${project.name} ${project.slug}`.toLowerCase();
+  return value.includes('sentinelx');
+}
+
+function SystemGraph() {
+  const nodes = [
+    { x: '16%', y: '28%', size: 'h-2 w-2', delay: 0 },
+    { x: '31%', y: '63%', size: 'h-1.5 w-1.5', delay: 0.4 },
+    { x: '49%', y: '34%', size: 'h-3 w-3', delay: 0.8 },
+    { x: '67%', y: '65%', size: 'h-2 w-2', delay: 0.2 },
+    { x: '82%', y: '30%', size: 'h-1.5 w-1.5', delay: 0.6 },
+    { x: '87%', y: '78%', size: 'h-2 w-2', delay: 1 },
+  ];
+
+  return (
+    <div className="relative h-64 overflow-hidden rounded-2xl border border-cyan-400/15 bg-black/30">
+      <div className="absolute inset-0 bg-grid-fine opacity-30" />
+
+      <div className="absolute inset-0">
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="h-full w-full opacity-35"
+        >
+          <line x1="16" y1="28" x2="49" y2="34" stroke="currentColor" strokeWidth="0.3" className="text-cyan-400" />
+          <line x1="31" y1="63" x2="49" y2="34" stroke="currentColor" strokeWidth="0.3" className="text-cyan-400" />
+          <line x1="49" y1="34" x2="67" y2="65" stroke="currentColor" strokeWidth="0.3" className="text-violet-400" />
+          <line x1="49" y1="34" x2="82" y2="30" stroke="currentColor" strokeWidth="0.3" className="text-cyan-400" />
+          <line x1="67" y1="65" x2="87" y2="78" stroke="currentColor" strokeWidth="0.3" className="text-violet-400" />
+          <line x1="82" y1="30" x2="87" y2="78" stroke="currentColor" strokeWidth="0.3" className="text-cyan-400" />
+        </svg>
+      </div>
+
+      {nodes.map((node, index) => (
+        <motion.div
+          key={index}
+          className="absolute"
+          style={{ left: node.x, top: node.y }}
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.45, 1, 0.45],
+          }}
+          transition={{
+            duration: 2.4,
+            repeat: Infinity,
+            delay: node.delay,
+            ease: 'easeInOut',
+          }}
+        >
+          <div className={cn('rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.8)]', node.size)} />
+        </motion.div>
+      ))}
+
+      <motion.div
+        className="absolute left-[49%] top-[34%] -translate-x-1/2 -translate-y-1/2"
+        animate={{
+          boxShadow: [
+            '0 0 20px rgba(34,211,238,0.2)',
+            '0 0 55px rgba(34,211,238,0.55)',
+            '0 0 20px rgba(34,211,238,0.2)',
+          ],
+        }}
+        transition={{ duration: 2.5, repeat: Infinity }}
+      >
+        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-cyan-300/40 bg-cyan-400/10 backdrop-blur">
+          <Radar className="h-5 w-5 text-cyan-300" />
+        </div>
+      </motion.div>
+
+      <div className="absolute bott

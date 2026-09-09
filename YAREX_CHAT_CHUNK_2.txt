@@ -1,0 +1,162 @@
+﻿n',
+      'Finished-product inventory management',
+      'Sales workflow with stock verification and deduction',
+      'Dashboard KPIs and operational charts',
+      'PDF invoice generation',
+      'Excel report exports',
+      'QR code and barcode generation',
+      'Printable product labels',
+      'Audit logging and validation',
+      'Duplicate transaction prevention',
+    ],
+
+    architecture:
+      'Full-stack ERP architecture using React and Vite for the frontend, FastAPI with SQLAlchemy for backend services, and PostgreSQL for persistent business data. The system connects purchasing, inventory, BOM, production, sales, authentication, reporting, and audit functionality through centralized business logic and REST APIs.',
+
+    github:
+      'https://github.com/Yashwanth01-cyber/ERP-Management-System-',
+
+    liveDemo: '#',
+
+    status: 'Completed',
+
+    screenshots: [],
+  },
+
+  {
+    slug: 'talkshield',
+    name: 'TalkShield',
+    tagline: 'Security-focused spam call analysis application',
+
+    overview:
+      'TalkShield is a cybersecurity-focused project exploring suspicious communication and spam call analysis. The project combines application development with security concepts to investigate potentially malicious or unwanted communication patterns.',
+
+    technologies: [
+      'Python',
+      'Flask',
+      'React',
+      'JavaScript',
+      'Git',
+      'GitHub',
+    ],
+
+    features: [
+      'Spam call analysis',
+      'Suspicious communication analysis',
+      'Security-focused application design',
+      'Backend API integration',
+      'User-oriented security insights',
+    ],
+
+    architecture:
+      'Client-server application architecture using React for the frontend and Flask for backend services. The application is organized around modular security-analysis functionality and API-based communication between frontend and backend components.',
+
+    github:
+      'https://github.com/Yashwanth01-cyber/TalkShield',
+
+    liveDemo: '#',
+
+    status: 'Active Development',
+
+    screenshots: [],
+  },
+];
+
+
+========================================
+SOURCE: .\data\skills.js
+========================================
+/** @type {Array<{ category: string; icon: string; items: Array<{ name: string; level: 'Beginner' | 'Intermediate' }> }>} */
+export const skills = [
+  {
+    category: 'Programming',
+    icon: 'Code2',
+    items: [
+      { name: 'Python', level: 'Intermediate' },
+      { name: 'Java', level: 'Beginner' },
+      { name: 'JavaScript', level: 'Beginner' },
+      { name: 'SQL', level: 'Beginner' },
+    ],
+  },
+
+  {
+    category: 'Networking',
+    icon: 'Network',
+    items: [
+      { name: 'TCP/IP', level: 'Intermediate' },
+      { name: 'DNS', level: 'Intermediate' },
+      { name: 'HTTP', level: 'Intermediate' },
+      { name: 'OSI Model', level: 'Intermediate' },
+      { name: 'Ports & Services', level: 'Intermediate' },
+    ],
+  },
+
+  {
+    category: 'Cybersecurity Tools',
+    icon: 'Terminal',
+    items: [
+      { name: 'Nmap', level: 'Intermediate' },
+      { name: 'Wireshark', level: 'Intermediate' },
+      { name: 'Burp Suite', level: 'Beginner' },
+      { name: 'Kali Linux', level: 'Beginner' },
+      { name: 'Metasploit', level: 'Beginner' },
+      { name: 'Git & GitHub', level: 'Intermediate' },
+    ],
+  },
+
+  {
+    category: 'Web Security',
+    icon: 'Globe',
+    items: [
+      { name: 'HTTP Requests', level: 'Intermediate' },
+      { name: 'Cookies & Sessions', level: 'Beginner' },
+      { name: 'Access Control', level: 'Beginner' },
+      { name: 'Web Application Security', level: 'Beginner' },
+    ],
+  },
+
+  {
+    category: 'Security Concepts',
+    icon: 'ShieldCheck',
+    items: [
+      { name: 'OWASP Top 10', level: 'Intermediate' },
+      { name: 'Vulnerability Assessment', level: 'Intermediate' },
+      { name: 'Penetration Testing', level: 'Beginner' },
+      { name: 'Secure Software Development', level: 'Beginner' },
+      { name: 'OSINT', level: 'Beginner' },
+    ],
+  },
+];
+
+export const levelStyles = {
+  Beginner: {
+    label: 'Beginner',
+    className: 'bg-red-500/10 text-red-400 border-red-500/30',
+  },
+
+  Intermediate: {
+    label: 'Intermediate',
+    className: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
+  },
+};
+
+========================================
+SOURCE: .\data\experience.js
+========================================
+export const experience = [
+  {
+    company: 'Navodita Infotech',
+    role: 'Cybersecurity Intern',
+    duration: '3 months',
+    period: '2025',
+    description:
+      'Worked on web application security testing, vulnerability identification, and secure coding practices. Contributed to internal security audits and prepared assessment reports.',
+    highlights: [
+      'Performed manual and automated web app testing',
+      'Identified OWASP Top 10 vulnerabilities',
+      'Documented remediation guidance for developers',
+    ],
+  },
+  {
+    company: 'Jyesta Corporate Entity',
+  

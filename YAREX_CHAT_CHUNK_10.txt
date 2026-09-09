@@ -1,0 +1,135 @@
+﻿tream
+                    </span>
+
+                    <span className="font-mono text-[8px] text-cyan-400/70">
+                      LIVE
+                    </span>
+                  </div>
+
+                  <div className="flex h-16 items-end gap-1">
+                    {[22, 34, 27, 46, 39, 58, 44, 66, 52, 72, 61, 78, 55, 70, 84, 63, 76, 88, 69, 82].map(
+                      (height, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ height: 0 }}
+                          animate={{ height: `${height}%` }}
+                          transition={{
+                            duration: 0.5,
+                            delay: 0.8 + index * 0.025,
+                          }}
+                          className="flex-1 rounded-t-sm bg-gradient-to-t from-cyan-500/10 to-cyan-300/60"
+                        />
+                      )
+                    )}
+                  </div>
+                </div>
+
+                {/* Footer */}
+                <div className="mt-5 flex items-center justify-between border-t border-white/[0.07] pt-4">
+                  <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-slate-600">
+                    attack surface intelligence
+                  </span>
+
+                  <span className="flex items-center gap-1.5 font-mono text-[8px] text-emerald-300">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                    READY
+                  </span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Bottom telemetry strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.04] sm:grid-cols-4"
+        >
+          {[
+            ['LOCATION', profile.location],
+            ['MODE', 'OFFENSIVE SECURITY'],
+            ['STATUS', 'AVAILABLE'],
+            ['INTERFACE', 'YASWANTH.OS'],
+          ].map(([label, value]) => (
+            <div
+              key={label}
+              className="bg-[#050914]/70 px-4 py-3 backdrop-blur-xl"
+            >
+              <div className="font-mono text-[8px] uppercase tracking-[0.22em] text-slate-600">
+                {label}
+              </div>
+              <div className="mt-1 truncate font-mono text-[9px] tracking-[0.08em] text-slate-300">
+                {value}
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, y: [0, 7, 0] }}
+        transition={{
+          opacity: { duration: 0.8, delay: 1.1 },
+          y: { duration: 1.5, repeat: Infinity },
+        }}
+        className="absolute bottom-5 left-1/2 -translate-x-1/2"
+      >
+        <div className="flex flex-col items-center gap-1">
+          <span className="font-mono text-[7px] uppercase tracking-[0.3em] text-slate-700">
+            scroll
+          </span>
+          <ChevronDown className="h-4 w-4 text-cyan-400/50" />
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+
+========================================
+SOURCE: .\components\sections\Skills.tsx
+========================================
+'use client';
+
+import { motion } from 'framer-motion';
+import {
+  Code2, Network, Terminal, Globe, ShieldCheck,
+  type LucideIcon,
+} from 'lucide-react';
+import { skills, levelStyles } from '@/data/skills';
+import { SectionHeading } from '@/components/shared/SectionHeading';
+import { GlassCard } from '@/components/shared/GlassCard';
+import { cn } from '@/lib/utils';
+
+const iconMap: Record<string, LucideIcon> = {
+  Code2, Network, Terminal, Globe, ShieldCheck,
+};
+
+export function Skills() {
+  return (
+    <section id="skills" className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <SectionHeading
+        eyebrow="skills"
+        title="Skills & Proficiency"
+        description="Categorized by domain, tagged by proficiency level."
+      />
+
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {skills.map((group, gi) => {
+          const Icon = iconMap[group.icon] ?? Code2;
+          return (
+            <motion.div
+              key={group.category}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ delay: gi * 0.05 }}
+            >
+              <GlassCard className="p-6 h-full">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                    <Icon className="h-4 w-4" />

@@ -19,7 +19,6 @@ import {
 import { SectionHeading } from '@/components/shared/SectionHeading';
 import { cn } from '@/lib/utils';
 import type { DbProject } from '@/lib/data';
-import { ProjectVisual } from '@/components/sections/ProjectVisual';
 
 const statusStyles: Record<string, string> = {
   'Active Development':
@@ -359,8 +358,6 @@ export function Projects({ projects }: ProjectsProps) {
                   </span>
                 </div>
 
-                <ProjectVisual title={project.name} />
-
                 <p className="mt-5 text-sm leading-7 text-muted-foreground">
                   {project.overview}
                 </p>
@@ -470,4 +467,3 @@ export function Projects({ projects }: ProjectsProps) {
     </section>
   );
 }
-

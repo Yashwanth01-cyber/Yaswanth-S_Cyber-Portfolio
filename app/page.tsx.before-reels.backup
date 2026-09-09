@@ -3,7 +3,6 @@ import { AmbientBackground } from '@/components/layout/AmbientBackground';
 import { SystemBoot } from '@/components/layout/SystemBoot';
 import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/sections/Hero';
-import { IntelligenceReels } from '@/components/sections/IntelligenceReels';
 import { Stats } from '@/components/sections/Stats';
 import { About } from '@/components/sections/About';
 import { Skills } from '@/components/sections/Skills';
@@ -37,7 +36,6 @@ export default async function Home() {
       <Navbar />
       <main className="relative z-10">
         <Hero />
-        <IntelligenceReels />
         <Stats
           projectCount={projects.length}
           experienceCount={experiences.length}
@@ -57,12 +55,9 @@ export default async function Home() {
         <Contact />
       </main>
       <Footer />
-</>
+    </>
   );
 }
-
-
-
 
 
 

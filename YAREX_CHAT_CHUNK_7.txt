@@ -1,0 +1,173 @@
+﻿        <div className="space-y-2">
+              {profile.currentFocus.map((item, index) => (
+                <p
+                  key={index}
+                  className="font-mono text-sm text-muted-foreground"
+                >
+                  <span className="text-emerald-400">&gt;</span> {item}
+                </p>
+              ))}
+            </div>
+          </GlassCard>
+        </motion.div>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ delay: 0.05 }}
+          >
+            <GlassCard className="p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <BookOpen className="h-5 w-5 text-cyan-400" />
+                <h3 className="text-sm font-semibold text-foreground">
+                  Tools in Practice
+                </h3>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {profile.toolsInPractice.map((tool, index) => (
+                  <span
+                    key={index}
+                    className="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs text-cyan-300"
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </GlassCard>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ delay: 0.1 }}
+        >
+          <GlassCard className="p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <Award className="h-5 w-5 text-red-400" />
+              <h3 className="text-sm font-semibold text-foreground">
+                  Latest Milestone
+              </h3>
+            </div>
+
+            <div className="space-y-2">
+              <p className="font-semibold text-foreground">
+                {profile.latestAchievement.title}
+              </p>
+
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {profile.latestAchievement.description}
+              </p>
+
+              <p className="text-xs text-emerald-400">
+                {profile.latestAchievement.date}
+              </p>
+            </div>
+          </GlassCard>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+========================================
+SOURCE: .\components\sections\Hero.tsx
+========================================
+'use client';
+
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import {
+  Github,
+  Linkedin,
+  FileDown,
+  ArrowRight,
+  ChevronDown,
+  ShieldCheck,
+  Terminal,
+  Activity,
+  Radar,
+} from 'lucide-react';
+import Link from 'next/link';
+import { profile } from '@/data/profile';
+import { siteConfig } from '@/lib/site-config';
+
+function useTypingEffect(
+  words: string[],
+  typingSpeed = 75,
+  deletingSpeed = 38,
+  pause = 1600
+) {
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    if (!words.length) return;
+
+    if (!deleting && subIndex === words[index].length) {
+      const timer = setTimeout(() => setDeleting(true), pause);
+      return () => clearTimeout(timer);
+    }
+
+    if (deleting && subIndex === 0) {
+      setDeleting(false);
+      setIndex((current) => (current + 1) % words.length);
+      return;
+    }
+
+    const timer = setTimeout(
+      () => {
+        setSubIndex((current) => current + (deleting ? -1 : 1));
+      },
+      deleting ? deletingSpeed : typingSpeed
+    );
+
+    return () => clearTimeout(timer);
+  }, [
+    subIndex,
+    index,
+    deleting,
+    words,
+    typingSpeed,
+    deletingSpeed,
+    pause,
+  ]);
+
+  return words[index]?.substring(0, subIndex) ?? '';
+}
+
+const telemetry = [
+  {
+    icon: Activity,
+    label: 'SYSTEM',
+    value: 'ONLINE',
+    tone: 'text-emerald-300',
+  },
+  {
+    icon: ShieldCheck,
+    label: 'SECURITY',
+    value: 'ACTIVE',
+    tone: 'text-cyan-300',
+  },
+  {
+    icon: Radar,
+    label: 'INTELLIGENCE',
+    value: 'MONITORING',
+    tone: 'text-violet-300',
+  },
+];
+
+export function Hero() {
+  const typed = useTypingEffect(profile.taglines.slice(1));
+
+  return (
+    <section className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden pt-20 pb-20">
+      {/* Local hero atmosphere */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-[8%] top-[18%] h-72 w-72 rounded-full bg-cyan-400/[0.08] blur-[100px]" />
+        <div className="absolute right-[5%] top-[25%] h-80 w-80 rounded-full bg-violet-500/[0.08] blur-[110px]" />
+
+        {/* Decorative orbital rings */}
+        <div className="absolute right-[7%] top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 rounded-full border border-cyan-300/[0.07] lg:block" />
+        <div className="

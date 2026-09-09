@@ -1,0 +1,205 @@
+﻿thcyber@gmail.com',
+  phone: '+91 8220818564',
+  social: {
+    linkedin: 'https://www.linkedin.com/in/yaswanths196',
+    github: 'https://github.com/Yashwanth01-cyber',
+  },
+  resumePath: '/Yaswanth_S_Cybersecurity_Resume.pdf',
+};
+
+
+========================================
+SOURCE: .\lib\data.ts
+========================================
+import { projects as staticProjects } from '@/data/projects';
+import { experience as staticExperience } from '@/data/experience';
+import { certifications as staticCerts } from '@/data/certifications';
+import { labs as staticLabs } from '@/data/labs';
+import { research as staticResearch } from '@/data/research';
+import { timeline as staticTimeline } from '@/data/timeline';
+import { blogs as staticBlogs } from '@/data/blogs';
+
+export interface DbProject {
+  slug: string;
+  name: string;
+  tagline: string;
+  overview: string;
+  technologies: string[];
+  features: string[];
+  architecture: string;
+  github: string;
+  liveDemo: string;
+  status: string;
+  screenshots: string[];
+}
+
+export interface DbExperience {
+  company: string;
+  role: string;
+  duration: string;
+  period: string;
+  description: string;
+  highlights: string[];
+}
+
+export interface DbCertification {
+  name: string;
+  issuer: string;
+  date: string;
+  credentialId: string;
+  url: string;
+  status: string;
+  type: string;
+}
+
+export interface DbLab {
+  title: string;
+  module: string;
+  status: string;
+  completedAt: string | null;
+}
+
+export interface DbResearch {
+  slug: string;
+  title: string;
+  abstract: string;
+  status: string;
+  progress: number;
+  date: string;
+  authors: string[];
+  tags: string[];
+}
+
+export interface DbTimelineEvent {
+  event: string;
+  date: string;
+  icon: string;
+}
+
+export interface DbBlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  date: string;
+  readTime: string;
+  tags: string[];
+}
+
+export async function getProjects(): Promise<DbProject[]> {
+  return staticProjects.map((p) => ({
+    slug: p.slug,
+    name: p.name,
+    tagline: p.tagline,
+    overview: p.overview,
+    technologies: p.technologies,
+    features: p.features,
+    architecture: p.architecture,
+    github: p.github,
+    liveDemo: p.liveDemo,
+    status: p.status,
+    screenshots: p.screenshots,
+  }));
+}
+
+export async function getExperiences(): Promise<DbExperience[]> {
+  return staticExperience.map((e) => ({
+    company: e.company,
+    role: e.role,
+    duration: e.duration,
+    period: e.period,
+    description: e.description,
+    highlights: e.highlights,
+  }));
+}
+
+export async function getCertifications(): Promise<DbCertification[]> {
+  return staticCerts.map((c) => ({
+    name: c.name,
+    issuer: c.issuer,
+    date: c.date,
+    credentialId: c.credentialId,
+    url: c.url,
+    status: c.status,
+    type: c.type || 'Certification',
+  }));
+}
+
+export async function getLabs() {
+  return staticLabs;
+}
+
+export async function getResearch(): Promise<DbResearch[]> {
+  return staticResearch.map((r) => ({
+    slug: r.slug,
+    title: r.title,
+    abstract: r.abstract,
+    status: r.status,
+    progress: r.progress,
+    date: r.date,
+    authors: r.authors,
+    tags: r.tags,
+  }));
+}
+
+export async function getTimeline(): Promise<DbTimelineEvent[]> {
+  return staticTimeline.map((t) => ({
+    event: t.event,
+    date: t.date,
+    icon: t.icon,
+  }));
+}
+
+export async function getBlogPosts(): Promise<DbBlogPost[]> {
+  return staticBlogs.map((b) => ({
+    slug: b.slug,
+    title: b.title,
+    excerpt: b.excerpt,
+    content: '',
+    date: b.date,
+    readTime: b.readTime,
+    tags: b.tags,
+  }));
+}
+
+export async function getBlogPostBySlug(
+  slug: string
+): Promise<DbBlogPost | null> {
+  const posts = await getBlogPosts();
+
+  return posts.find((p) => p.slug === slug) ?? null;
+}
+
+========================================
+SOURCE: .\content\blog\burp-suite-for-beginners.md
+========================================
+# Burp Suite for Beginners
+
+Burp Suite is the industry-standard toolkit for web application security testing. This guide covers the essentials to get you intercepting and testing requests in minutes.
+
+## Setup
+
+1. Download Burp Suite Community Edition from PortSwigger.
+2. Configure your browser to use Burp as a proxy on `127.0.0.1:8080`.
+3. Install the Burp CA certificate so HTTPS traffic can be inspected.
+
+## The core tools
+
+### Proxy
+
+The Proxy tab is where you intercept requests between your browser and the target server. Toggle interception on, browse the app, and inspect every HTTP request and response.
+
+### Repeater
+
+Send an intercepted request to Repeater to modify it manually and resend it repeatedly. This is where most manual testing happens â€” tweak a parameter, resend, observe the response.
+
+### Intruder
+
+Automate sending payloads across positions in a request. Useful for brute-forcing IDs, fuzzing parameters, and enumerating users.
+
+## Your first test
+
+1. Intercept a login request.
+2. Send it to Repeater.
+3. Modify the username parameter to include a single quote (`'`).
+4.

@@ -1,0 +1,134 @@
+﻿'use client';
+
+import { useEffect, useState } from 'react';
+
+export function SystemBoot() {
+  const [progress, setProgress] = useState(0);
+  const [entered, setEntered] = useState(false);
+useEffect(() => {
+    const timer = window.setInterval(() => {
+      setProgress((current) => {
+        if (current >= 100) {
+          window.clearInterval(timer);
+          return 100;
+        }
+
+        return Math.min(current + Math.floor(Math.random() * 12) + 4, 100);
+      });
+    }, 90);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+    const enterPortfolio = () => {
+    setIsExiting(true);
+
+    window.setTimeout(() => {
+      setBootComplete(true);
+    }, 700);
+  };
+
+  if (entered) {
+    return (
+      <button
+        type="button"
+        onClick={() => setEntered(false)}
+        aria-label="Enable startup sound"
+        className="fixed bottom-5 right-5 z-[100] flex h-10 w-10 items-center justify-center rounded-full border border-cyan-400/20 bg-slate-950/70 text-xs text-cyan-300 backdrop-blur-xl transition hover:border-cyan-300/50 hover:bg-cyan-400/10"
+      >
+        {soundEnabled ? '♫' : '×'}
+      </button>
+    );
+  }
+
+  return (
+    <div className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-[#03060d]">
+      <div className="absolute inset-0 bg-grid opacity-40" />
+
+      <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/10 blur-[120px]" />
+
+      <div className="relative z-10 w-[min(92vw,720px)]">
+        <div className="mb-10 text-center">
+          <div className="mb-3 font-mono text-xs uppercase tracking-[0.45em] text-cyan-300/60">
+            Digital Identity System
+          </div>
+
+          <h1 className="text-glow text-5xl font-black tracking-[-0.05em] text-white sm:text-7xl">
+            YASWANTH.OS
+          </h1>
+
+          <p className="mt-4 font-mono text-xs tracking-[0.3em] text-slate-500">
+            CYBER INTELLIGENCE INTERFACE
+          </p>
+        </div>
+
+        <div className="glass border-cyan-400/20 p-6 sm:p-8">
+          <div className="mb-6 flex items-center justify-between font-mono text-xs">
+            <span className="text-slate-500">
+              SYSTEM INITIALIZATION
+            </span>
+
+            <span className="text-cyan-300">
+              {progress}%
+            </span>
+          </div>
+
+          <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 shadow-[0_0_20px_rgba(34,211,238,0.55)] transition-all duration-100"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 gap-3 font-mono text-xs sm:grid-cols-3">
+            <div className="border border-white/5 bg-white/[0.025] p-3">
+              <div className="text-slate-600">NETWORK</div>
+              <div className="mt-1 text-emerald-300">
+                ● ONLINE
+              </div>
+            </div>
+
+            <div className="border border-white/5 bg-white/[0.025] p-3">
+              <div className="text-slate-600">SECURITY</div>
+              <div className="mt-1 text-cyan-300">
+                ● ACTIVE
+              </div>
+            </div>
+
+            <div className="border border-white/5 bg-white/[0.025] p-3">
+              <div className="text-slate-600">IDENTITY</div>
+              <div className="mt-1 text-violet-300">
+                ● VERIFIED
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 text-center">
+            <button
+              type="button"
+              disabled={progress < 100}
+              onClick={enterPortfolio}
+              className="group relative inline-flex items-center gap-3 border border-cyan-400/30 bg-cyan-400/5 px-7 py-3 font-mono text-xs tracking-[0.2em] text-cyan-300 transition hover:border-cyan-300/70 hover:bg-cyan-400/10 disabled:cursor-not-allowed disabled:opacity-30"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.9)]" />
+
+              ENTER PORTFOLIO
+
+              <span className="transition-transform group-hover:translate-x-1">
+                →
+              </span>
+            </button>
+          </div>
+
+          <div className="mt-5 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-slate-700">
+            Click to initialize interface audio
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+
+

@@ -1,0 +1,146 @@
+﻿ssName="flex items-center justify-between gap-3 rounded-lg border border-border/50 bg-white/[0.02] px-3 py-3"
+                  >
+                    <div className="min-w-0">
+                      <p className="flex items-center gap-2 text-sm">
+                        <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
+
+                        <span className="truncate">
+                          {activity.title}
+                        </span>
+                      </p>
+
+                      <p className="mt-0.5 pl-5 text-xs text-muted-foreground">
+                        {activity.module}
+                      </p>
+                    </div>
+
+                    <span className="shrink-0 font-mono text-xs text-muted-foreground">
+                      {activity.date}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Learning Roadmap */}
+            <div className="mt-6 border-t border-border/50 pt-6">
+              <div className="mb-4 flex items-center justify-between">
+                <h3 className="text-sm font-semibold">
+                  Learning Roadmap
+                </h3>
+
+                <span className="text-xs text-muted-foreground">
+                  {labs.moduleProgress.length} modules tracked
+                </span>
+              </div>
+
+              <div className="space-y-4">
+                {labs.moduleProgress.map((module) => {
+                  const percentage =
+                    module.total > 0
+                      ? Math.round(
+                          (module.completed / module.total) * 100
+                        )
+                      : 0;
+
+                  const isCurrent =
+                    module.module === labs.currentModule;
+
+                  return (
+                    <div key={module.module}>
+                      <div className="mb-1.5 flex items-center justify-between gap-3">
+                        <div className="flex min-w-0 items-center gap-2">
+                          {isCurrent && (
+                            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+                          )}
+
+                          <span
+                            className={
+                              isCurrent
+                                ? 'truncate text-xs font-medium text-emerald-400'
+                                : 'truncate text-xs text-muted-foreground'
+                            }
+                          >
+                            {module.module}
+                          </span>
+                        </div>
+
+                        <span className="shrink-0 font-mono text-xs text-muted-foreground">
+                          {module.completed === 0
+                            ? 'Upcoming'
+                            : `${module.completed}/${module.total}`}
+                        </span>
+                      </div>
+
+                      <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/5">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{
+                            width: `${percentage}%`,
+                          }}
+                          viewport={{ once: true }}
+                          transition={{
+                            duration: 0.6,
+                            delay: 0.05,
+                          }}
+                          className="h-full rounded-full bg-emerald-500"
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </GlassCard>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+========================================
+SOURCE: .\components\sections\Research.tsx
+========================================
+'use client';
+
+import { motion } from 'framer-motion';
+import {
+  FileText,
+  Loader2,
+  CheckCircle2,
+  ExternalLink,
+  Users,
+  Calendar,
+  ArrowUpRight,
+} from 'lucide-react';
+import { SectionHeading } from '@/components/shared/SectionHeading';
+import { GlassCard } from '@/components/shared/GlassCard';
+import { cn } from '@/lib/utils';
+import type { DbResearch } from '@/lib/data';
+
+interface ResearchProps {
+  research: DbResearch[];
+}
+
+export function Research({ research }: ResearchProps) {
+  return (
+    <section
+      id="research"
+      className="mx-auto max-w-6xl px-4 py-20 sm:px-6"
+    >
+      <SectionHeading
+        eyebrow="research"
+        title="Research"
+        description="Security research, technical studies, and work in progress."
+      />
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        {research.map((paper, i) => {
+          const published = paper.status === 'Published';
+
+          return (
+            <motion.div
+              key={paper.slug}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+     
