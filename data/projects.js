@@ -1,4 +1,4 @@
-﻿export const projects = [
+export const projects = [
   {
     slug: 'sentinelx',
     name: 'SentinelX',
@@ -37,6 +37,64 @@
     liveDemo: '#',
 
     status: 'Active Development',
+
+    screenshots: [],
+  },
+
+  {
+    slug: 'manufacturing-erp-management-system',
+    name: 'Manufacturing ERP Management System',
+    tagline: 'Integrated ERP platform for manufacturing operations and business workflow management',
+
+    overview:
+      'Manufacturing ERP Management System is a full-stack enterprise resource planning platform developed to centralize manufacturing operations including products, raw materials, suppliers, customers, purchasing, inventory, production, sales, employees, and management reporting. The system connects these modules through real business workflows instead of treating them as independent CRUD operations.',
+
+    technologies: [
+      'React',
+      'Vite',
+      'Tailwind CSS',
+      'Axios',
+      'FastAPI',
+      'Python',
+      'SQLAlchemy',
+      'PostgreSQL',
+      'JWT',
+      'Alembic',
+      'Pytest',
+      'ReportLab',
+      'OpenPyXL',
+      'Git',
+      'GitHub',
+    ],
+
+    features: [
+      'Role-based authentication and authorization',
+      'Product and material management',
+      'Supplier and customer management',
+      'Purchase order and receiving workflow',
+      'Inventory tracking with low-stock alerts',
+      'Bill of Materials (BOM) management',
+      'Production workflow with automatic material deduction',
+      'Finished-product inventory management',
+      'Sales workflow with stock verification and deduction',
+      'Dashboard KPIs and operational charts',
+      'PDF invoice generation',
+      'Excel report exports',
+      'QR code and barcode generation',
+      'Printable product labels',
+      'Audit logging and validation',
+      'Duplicate transaction prevention',
+    ],
+
+    architecture:
+      'Full-stack ERP architecture using React and Vite for the frontend, FastAPI with SQLAlchemy for backend services, and PostgreSQL for persistent business data. The system connects purchasing, inventory, BOM, production, sales, authentication, reporting, and audit functionality through centralized business logic and REST APIs.',
+
+    github:
+      'https://github.com/Yashwanth01-cyber/ERP-Management-System-',
+
+    liveDemo: '#',
+
+    status: 'Completed',
 
     screenshots: [],
   },
