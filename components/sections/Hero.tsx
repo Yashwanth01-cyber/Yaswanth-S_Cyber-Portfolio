@@ -113,7 +113,7 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 sm:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-8 mobile-page-container">
         <div className="grid items-center gap-14 lg:grid-cols-[1.2fr_0.8fr]">
           {/* Main identity */}
           <div>
@@ -157,7 +157,7 @@ export function Hero() {
                 delay: 0.15,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="max-w-4xl text-[clamp(3.4rem,9vw,8rem)] font-black leading-[0.84] tracking-[-0.07em] text-white"
+              className="hero-identity-title max-w-4xl text-[clamp(3.4rem,9vw,8rem)] font-black leading-[0.84] tracking-[-0.07em] text-white"
             >
               {profile.taglines[0]}
             </motion.h1>
@@ -424,3 +424,5 @@ export function Hero() {
     </section>
   );
 }
+
+

@@ -22,7 +22,7 @@ type ProjectVisualProps = {
 
 function ManufacturingVisual() {
   return (
-    <div className="relative h-full min-h-[300px] overflow-hidden rounded-2xl border border-white/10 bg-[#07111c]">
+    <div className="relative h-[260px] min-h-0 overflow-hidden rounded-2xl border border-white/10 bg-[#07111c] sm:h-full sm:min-h-[300px]">
       <div className="absolute inset-0 bg-grid-fine opacity-30" />
 
       <div className="absolute -left-20 -top-20 h-56 w-56 rounded-full bg-cyan-500/10 blur-3xl" />
@@ -117,7 +117,7 @@ function ManufacturingVisual() {
 
 function TalkShieldVisual() {
   return (
-    <div className="relative h-full min-h-[300px] overflow-hidden rounded-2xl border border-white/10 bg-[#090916]">
+    <div className="relative h-[260px] min-h-0 overflow-hidden rounded-2xl border border-white/10 bg-[#090916] sm:h-full sm:min-h-[300px]">
       <div className="absolute inset-0 bg-grid-fine opacity-25" />
 
       <div className="absolute -left-16 top-10 h-52 w-52 rounded-full bg-fuchsia-500/10 blur-3xl" />
@@ -295,3 +295,4 @@ export function ProjectVisual({ title = '' }: ProjectVisualProps) {
 
   return null;
 }
+

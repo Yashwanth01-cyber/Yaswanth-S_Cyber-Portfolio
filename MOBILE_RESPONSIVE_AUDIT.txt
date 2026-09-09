@@ -1,0 +1,861 @@
+YASWANTH.OS MOBILE RESPONSIVE AUDIT
+Generated: 09/09/2026 22:50:26
+.\components\layout\Navbar.tsx
+
+========================================
+.\components\sections\Hero.tsx
+'use client';
+
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Github,
+  ExternalLink,
+  ChevronDown,
+  Cpu,
+  CheckCircle2,
+  Loader2,
+  Shield,
+  Radar,
+  Activity,
+  Network,
+  ArrowUpRight,
+  Terminal,
+} from 'lucide-react';
+import { SectionHeading } from '@/components/shared/SectionHeading';
+import { cn } from '@/lib/utils';
+import type { DbProject } from '@/lib/data';
+import { ProjectVisual } from '@/components/sections/ProjectVisual';
+
+const statusStyles: Record<string, string> = {
+  'Active Development':
+    'text-cyan-300 bg-cyan-400/10 border-cyan-400/25',
+  Completed:
+    'text-emerald-300 bg-emerald-400/10 border-emerald-400/25',
+  'On Hold':
+    'text-muted-foreground bg-muted/20 border-border',
+};
+
+function isSentinelX(project: DbProject) {
+  const value = `${project.name} ${project.slug}`.toLowerCase();
+  return value.includes('sentinelx');
+}
+
+function SystemGraph() {
+  const nodes = [
+    { x: '16%', y: '28%', size: 'h-2 w-2', delay: 0 },
+    { x: '31%', y: '63%', size: 'h-1.5 w-1.5', delay: 0.4 },
+    { x: '49%', y: '34%', size: 'h-3 w-3', delay: 0.8 },
+    { x: '67%', y: '65%', size: 'h-2 w-2', delay: 0.2 },
+    { x: '82%', y: '30%', size: 'h-1.5 w-1.5', delay: 0.6 },
+    { x: '87%', y: '78%', size: 'h-2 w-2', delay: 1 },
+  ];
+
+  return (
+    <div className="relative h-64 overflow-hidden rounded-2xl border border-cyan-400/15 bg-black/30">
+      <div className="absolute inset-0 bg-grid-fine opacity-30" />
+
+      <div className="absolute inset-0">
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="h-full w-full opacity-35"
+        >
+          <line x1="16" y1="28" x2="49" y2="34" stroke="currentColor" strokeWidth="0.3" className="text-cyan-400" />
+          <line x1="31" y1="63" x2="49" y2="34" stroke="currentColor" strokeWidth="0.3" className="text-cyan-400" />
+          <line x1="49" y1="34" x2="67" y2="65" stroke="currentColor" strokeWidth="0.3" className="text-violet-400" />
+          <line x1="49" y1="34" x2="82" y2="30" stroke="currentColor" strokeWidth="0.3" className="text-cyan-400" />
+          <line x1="67" y1="65" x2="87" y2="78" stroke="currentColor" strokeWidth="0.3" className="text-violet-400" />
+          <line x1="82" y1="30" x2="87" y2="78" stroke="currentColor" strokeWidth="0.3" className="text-cyan-400" />
+        </svg>
+      </div>
+
+      {nodes.map((node, index) => (
+        <motion.div
+          key={index}
+          className="absolute"
+          style={{ left: node.x, top: node.y }}
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.45, 1, 0.45],
+          }}
+          transition={{
+            duration: 2.4,
+            repeat: Infinity,
+            delay: node.delay,
+            ease: 'easeInOut',
+          }}
+        >
+          <div className={cn('rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.8)]', node.size)} />
+        </motion.div>
+      ))}
+
+      <motion.div
+        className="absolute left-[49%] top-[34%] -translate-x-1/2 -translate-y-1/2"
+        animate={{
+          boxShadow: [
+            '0 0 20px rgba(34,211,238,0.2)',
+            '0 0 55px rgba(34,211,238,0.55)',
+            '0 0 20px rgba(34,211,238,0.2)',
+          ],
+        }}
+        transition={{ duration: 2.5, repeat: Infinity }}
+      >
+        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-cyan-300/40 bg-cyan-400/10 backdrop-blur">
+          <Radar className="h-5 w-5 text-cyan-300" />
+        </div>
+      </motion.div>
+
+      <div className="absolute bottom-4 left-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-cyan-300/70">
+        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-300" />
+        Attack surface intelligence
+      </div>
+
+      <div className="absolute right-4 top-4 rounded-md border border-cyan-400/15 bg-black/40 px-2 py-1 font-mono text-[9px] uppercase tracking-wider text-muted-foreground backdrop-blur">
+        LIVE TELEMETRY
+      </div>
+    </div>
+  );
+}
+
+interface ProjectsProps {
+  projects: DbProject[];
+}
+
+export function Projects({ projects }: ProjectsProps) {
+  const [expanded, setExpanded] = useState<string | null>(null);
+
+  return (
+    <section id="projects" className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6">
+      <SectionHeading
+        eyebrow="systems / intelligence"
+        title="Projects"
+        description="Security systems, intelligent applications, and engineering work built from the ground up."
+      />
+
+      <div className="mt-12 space-y-8">
+        {projects.map((project, i) => {
+          const isOpen = expanded === project.slug;
+          const flagship = isSentinelX(project);
+
+          if (flagship) {
+            return (
+              <motion.article
+                key={project.slug}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.7 }}
+                className="group relative overflow-hidden rounded-3xl border border-cyan-400/20 bg-black/45 p-5 shadow-[0_0_80px_rgba(34,211,238,0.06)] backdrop-blur-xl sm:p-7 lg:p-9"
+              >
+                <div className="pointer-events-none absolute -right-40 -top-40 h-96 w-96 rounded-full bg-cyan-400/10 blur-3xl transition-opacity duration-700 group-hover:opacity-100" />
+                <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-violet-500/10 blur-3xl" />
+
+                <div className="relative">
+                  <div className="mb-7 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.22em] text-cyan-300/80">
+                      <span className="text-muted-foreground">01</span>
+                      <span className="h-px w-8 bg-cyan-400/30" />
+                      <span>Flagship security system</span>
+                    </div>
+
+                    <span
+                      className={cn(
+                        'inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[10px] font-medium uppercase tracking-wider',
+                        statusStyles[project.status] ?? statusStyles['Active Development']
+                      )}
+                    >
+                      {project.status === 'Active Development' && (
+                        <Loader2 className="h-3 w-3 animate-spin" />
+                      )}
+                      {project.status}
+                    </span>
+                  </div>
+
+                  <div className="grid items-center gap-8 lg:grid-cols-[1fr_0.95fr] lg:gap-12">
+                    <div>
+                      <div className="mb-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-cyan-300/60">
+                        <Shield className="h-3.5 w-3.5" />
+                        Intelligent external attack surface
+                      </div>
+
+                      <h3 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+                        <span className="text-glow">SENTINEL</span>
+                        <span className="text-cyan-300">X</span>
+                      </h3>
+
+                      <p className="mt-3 max-w-xl text-base font-medium text-foreground/80 sm:text-lg">
+                        {project.tagline}
+                      </p>
+
+                      <p className="mt-5 max-w-2xl text-sm leading-7 text-muted-foreground">
+                        {project.overview}
+                      </p>
+
+                      <div className="mt-6 flex flex-wrap gap-2">
+                        {project.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="rounded-md border border-cyan-400/15 bg-cyan-400/5 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-cyan-200/80"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="mt-7 flex flex-wrap gap-3">
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 rounded-xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-2.5 text-xs font-semibold text-cyan-200 transition-all hover:border-cyan-300/40 hover:bg-cyan-400/15"
+                        >
+                          <Github className="h-4 w-4" />
+                          Source
+                          <ArrowUpRight className="h-3.5 w-3.5" />
+                        </a>
+
+                        <a
+                          href={project.liveDemo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={cn(
+                            'inline-flex items-center gap-2 rounded-xl border px-4 py-2.5 text-xs font-semibold transition-all',
+                            project.liveDemo === '#'
+                              ? 'pointer-events-none border-border/40 text-muted-foreground/40'
+                              : 'border-border bg-white/5 text-muted-foreground hover:border-cyan-400/20 hover:text-cyan-300'
+                          )}
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          Live interface
+                        </a>
+
+                        <button
+                          onClick={() => setExpanded(isOpen ? null : project.slug)}
+                          className="inline-flex items-center gap-2 rounded-xl border border-border/50 bg-white/[0.03] px-4 py-2.5 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground"
+                        >
+                          <Terminal className="h-4 w-4" />
+                          {isOpen ? 'Close system details' : 'Inspect architecture'}
+                          <ChevronDown
+                            className={cn(
+                              'h-3.5 w-3.5 transition-transform',
+                              isOpen && 'rotate-180'
+                            )}
+                          />
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <SystemGraph />
+
+                      <div className="mt-4 grid grid-cols-3 gap-2">
+                        <div className="rounded-xl border border-border/40 bg-white/[0.025] p-3">
+                          <div className="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
+                            <Activity className="h-3 w-3 text-cyan-300" />
+                            System
+                          </div>
+                          <p className="mt-2 text-xs font-semibold text-emerald-300">ONLINE</p>
+                        </div>
+
+                        <div className="rounded-xl border border-border/40 bg-white/[0.025] p-3">
+                          <div className="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
+                            <Network className="h-3 w-3 text-violet-300" />
+                            Mode
+                          </div>
+                          <p className="mt-2 text-xs font-semibold text-cyan-300">INTEL</p>
+                        </div>
+
+                        <div className="rounded-xl border border-border/40 bg-white/[0.025] p-3">
+                          <div className="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
+                            <Shield className="h-3 w-3 text-emerald-300" />
+                            Layer
+                          </div>
+                          <p className="mt-2 text-xs font-semibold text-violet-300">SECURE</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="mt-8 grid gap-6 border-t border-cyan-400/10 pt-7 md:grid-cols-2">
+                          <div>
+                            <div className="mb-3 flex items-center gap-2">
+                              <Cpu className="h-4 w-4 text-cyan-300" />
+                              <h4 className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                                Architecture
+                              </h4>
+                            </div>
+                            <p className="text-sm leading-7 text-muted-foreground">
+                              {project.architecture}
+                            </p>
+                          </div>
+
+                          <div>
+                            <h4 className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                              Capabilities
+                            </h4>
+                            <ul className="space-y-2.5">
+                              {project.features.map((feature) => (
+                                <li
+                                  key={feature}
+                                  className="flex items-start gap-2.5 text-sm leading-6 text-muted-foreground"
+                                >
+                                  <CheckCircle2 className="mt-1 h-3.5 w-3.5 shrink-0 text-cyan-300" />
+                                  {feature}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </motion.article>
+            );
+          }
+
+          return (
+            <motion.article
+              key={project.slug}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ delay: Math.min(i * 0.08, 0.3), duration: 0.55 }}
+              whileHover={{ y: -5 }}
+              className="group relative overflow-hidden rounded-2xl border border-border/60 bg-white/[0.025] p-6 backdrop-blur-xl transition-colors duration-300 hover:border-cyan-400/20 hover:bg-white/[0.04]"
+            >
+              <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-cyan-400/5 blur-3xl transition-opacity group-hover:opacity-100" />
+
+              <div className="relative flex h-full flex-col">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[10px] tracking-widest text-muted-foreground/50">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+
+                    <div>
+                      <h3 className="text-xl font-semibold tracking-tight transition-colors group-hover:text-cyan-200">
+                        {project.name}
+                      </h3>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {project.tagline}
+                      </p>
+                    </div>
+                  </div>
+
+                  <span
+                    className={cn(
+                      'shrink-0 inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[9px] font-medium uppercase tracking-wider',
+                      statusStyles[project.status] ?? statusStyles['Active Development']
+                    )}
+                  >
+                    {project.status === 'Active Development' && (
+                      <Loader2 className="h-3 w-3 animate-spin" />
+                    )}
+                    {project.status}
+                  </span>
+                </div>
+
+                <ProjectVisual title={project.name} />
+
+                <p className="mt-5 text-sm leading-7 text-muted-foreground">
+                  {project.overview}
+                </p>
+
+                <div className="mt-5 flex flex-wrap gap-1.5">
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="rounded-md border border-border/60 bg-white/[0.035] px-2 py-1 font-mono text-[10px] text-muted-foreground transition-colors group-hover:border-cyan-400/10 group-hover:text-cyan-200/70"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => setExpanded(isOpen ? null : project.slug)}
+                  className="mt-5 inline-flex w-fit items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-cyan-300/80 transition-colors hover:text-cyan-200"
+                >
+                  {isOpen ? 'Hide details' : 'Inspect system'}
+                  <ChevronDown
+                    className={cn(
+                      'h-3.5 w-3.5 transition-transform',
+                      isOpen && 'rotate-180'
+                    )}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="mt-5 space-y-5 border-t border-border/40 pt-5">
+                        <div>
+                          <div className="mb-2 flex items-center gap-2">
+                            <Cpu className="h-3.5 w-3.5 text-cyan-300" />
+                            <h4 className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                              Architecture
+                            </h4>
+                          </div>
+                          <p className="text-sm leading-6 text-muted-foreground">
+                            {project.architecture}
+                          </p>
+                        </div>
+
+                        <div>
+                          <h4 className="mb-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                            Features
+                          </h4>
+                          <ul className="space-y-2">
+                            {project.features.map((feature) => (
+                              <li
+                                key={feature}
+                                className="flex items-start gap-2 text-sm leading-6 text-muted-foreground"
+                              >
+                                <CheckCircle2 className="mt-1 h-3.5 w-3.5 shrink-0 text-cyan-300" />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <div className="mt-auto flex items-center gap-4 border-t border-border/30 pt-5">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-cyan-300"
+                  >
+                    <Github className="h-4 w-4" />
+                    GitHub
+                  </a>
+
+                  <a
+                    href={project.liveDemo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      'inline-flex items-center gap-1.5 text-xs font-medium',
+                      project.liveDemo === '#'
+                        ? 'pointer-events-none text-muted-foreground/40'
+                        : 'text-muted-foreground transition-colors hover:text-cyan-300'
+                    )}
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Live Demo
+                  </a>
+
+                  <span className="ml-auto hidden items-center gap-1 font-mono text-[9px] uppercase tracking-wider text-muted-foreground/40 sm:flex">
+                    system
+                    <ArrowUpRight className="h-3 w-3" />
+                  </span>
+                </div>
+              </div>
+            </motion.article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+
+========================================
+'use client';
+
+import { motion } from 'framer-motion';
+import {
+  Award,
+  ExternalLink,
+  Briefcase,
+  GraduationCap,
+  BookOpen,
+  Trophy,
+  Code2,
+  ShieldCheck,
+} from 'lucide-react';
+
+import { SectionHeading } from '@/components/shared/SectionHeading';
+import { GlassCard } from '@/components/shared/GlassCard';
+import { cn } from '@/lib/utils';
+import type { DbCertification } from '@/lib/data';
+
+interface CertificationsProps {
+  certifications: DbCertification[];
+}
+
+const categoryConfig: Record<
+  string,
+  {
+    label: string;
+    icon: typeof Award;
+    description: string;
+  }
+> = {
+  Certification: {
+    label: 'Cybersecurity Certifications',
+    icon: ShieldCheck,
+    description: 'Professional cybersecurity credentials and certifications.',
+  },
+
+  Internship: {
+    label: 'Internships',
+    icon: Briefcase,
+    description: 'Industry internship experience and practical training.',
+  },
+
+  Training: {
+    label: 'Training',
+    icon: GraduationCap,
+    description: 'Specialized cybersecurity training programs.',
+  },
+
+  'Job Simulation': {
+    label: 'Job Simulations',
+    icon: Trophy,
+    description: 'Industry-focused virtual work experience programs.',
+  },
+
+  'Professional Program': {
+    label: 'Professional Programs',
+    icon: Code2,
+    description: 'Technology and professional development programs.',
+  },
+
+  Learning: {
+    label: 'Current Learning',
+    icon: BookOpen,
+    description: 'Security learning currently in progress.',
+  },
+};
+
+const categoryOrder = [
+  'Certification',
+  'Internship',
+  'Training',
+  'Job Simulation',
+  'Professional Program',
+  'Learning',
+];
+
+export function Certifications({
+  certifications,
+}: CertificationsProps) {
+  const grouped = categoryOrder
+    .map((type) => ({
+      type,
+      items: certifications.filter((cert) => cert.type === type),
+    }))
+    .filter((group) => group.items.length > 0);
+
+  return (
+    <section
+      id="certifications"
+      className="mx-auto max-w-6xl px-4 py-20 sm:px-6"
+    >
+      <SectionHeading
+        eyebrow="credentials"
+        title="Certifications & Credentials"
+        description="Professional certifications, internships, training, and industry programs that support my cybersecurity journey."
+      />
+
+      <div className="space-y-12">
+        {grouped.map((group, groupIndex) => {
+          const config =
+            categoryConfig[group.type] ?? categoryConfig.Certification;
+
+          const Icon = config.icon;
+
+          return (
+            <motion.div
+              key={group.type}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ delay: groupIndex * 0.08 }}
+            >
+              {/* Category heading */}
+              <div className="mb-5 flex items-start gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-400">
+                  <Icon className="h-5 w-5" />
+                </div>
+
+                <div>
+                  <h3 className="text-base font-semibold">
+                    {config.label}
+                  </h3>
+
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {config.description}
+                  </p>
+                </div>
+              </div>
+
+              {/* Cards */}
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {group.items.map((cert, i) => {
+                  const inProgress = cert.status === 'In Progress';
+
+                  return (
+                    <motion.div
+                      key={`${cert.name}-${cert.issuer}-${i}`}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.05 }}
+                    >
+                      <GlassCard className="flex h-full flex-col p-5">
+                        {/* Top row */}
+                        <div className="flex items-start justify-between gap-3">
+                          <span
+                            className={cn(
+                              'flex h-9 w-9 items-center justify-center rounded-lg border',
+                              inProgress
+                                ? 'border-blue-500/20 bg-blue-500/10 text-blue-400'
+                                : 'border-emerald-500/20 bg-emerald-500/10 text-emerald-400'
+                            )}
+                          >
+                            <Award className="h-4 w-4" />
+                          </span>
+
+                          <span
+                            className={cn(
+                              'rounded-full border px-2 py-0.5 text-xs font-medium',
+                              inProgress
+                                ? 'border-blue-500/30 bg-blue-500/10 text-blue-400'
+                                : 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
+                            )}
+                          >
+                            {cert.status}
+                          </span>
+                        </div>
+
+                        {/* Certificate name */}
+                        <h4 className="mt-4 text-sm font-semibold leading-snug">
+                          {cert.name}
+                        </h4>
+
+                        {/* Issuer + date */}
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {cert.issuer} • {cert.date}
+                        </p>
+
+                        {/* Credential */}
+                        <div className="mt-auto pt-5">
+                          <div className="flex items-center justify-between gap-3">
+                            <span className="min-w-0 truncate font-mono text-xs text-muted-foreground/70">
+                              ID: {cert.credentialId}
+                            </span>
+
+                            {cert.url && cert.url !== '#' && (
+                              <a
+                                href={cert.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-emerald-400 transition-colors hover:text-emerald-300"
+                              >
+                                View
+                                <ExternalLink className="h-3 w-3" />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </GlassCard>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+'use client';
+
+import { motion } from 'framer-motion';
+import {
+  FileText,
+  Loader2,
+  CheckCircle2,
+  ExternalLink,
+  Users,
+  Calendar,
+  ArrowUpRight,
+} from 'lucide-react';
+import { SectionHeading } from '@/components/shared/SectionHeading';
+import { GlassCard } from '@/components/shared/GlassCard';
+import { cn } from '@/lib/utils';
+import type { DbResearch } from '@/lib/data';
+
+interface ResearchProps {
+  research: DbResearch[];
+}
+
+export function Research({ research }: ResearchProps) {
+  return (
+    <section
+      id="research"
+      className="mx-auto max-w-6xl px-4 py-20 sm:px-6"
+    >
+      <SectionHeading
+        eyebrow="research"
+        title="Research"
+        description="Security research, technical studies, and work in progress."
+      />
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        {research.map((paper, i) => {
+          const published = paper.status === 'Published';
+
+          return (
+            <motion.div
+              key={paper.slug}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <GlassCard className="p-6 h-full flex flex-col">
+                {/* Header */}
+                <div className="flex items-start justify-between gap-4">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-400">
+                    <FileText className="h-5 w-5" />
+                  </span>
+
+                  <span
+                    className={cn(
+                      'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium',
+                      published
+                        ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
+                        : 'border-blue-500/30 bg-blue-500/10 text-blue-400'
+                    )}
+                  >
+                    {published ? (
+                      <CheckCircle2 className="h-3 w-3" />
+                    ) : (
+                      <Loader2 className="h-3 w-3 animate-spin" />
+                    )}
+
+                    {paper.status}
+                  </span>
+                </div>
+
+                {/* Title */}
+                <h3 className="mt-5 text-lg font-semibold leading-snug">
+                  {paper.title}
+                </h3>
+
+                {/* Metadata */}
+                <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
+                  <span className="inline-flex items-center gap-1.5">
+                    <Users className="h-3.5 w-3.5" />
+                    {paper.authors.join(', ')}
+                  </span>
+
+                  <span className="inline-flex items-center gap-1.5">
+                    <Calendar className="h-3.5 w-3.5" />
+                    {paper.date}
+                  </span>
+                </div>
+
+                {/* Abstract */}
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  {paper.abstract}
+                </p>
+
+                {/* Tags */}
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {paper.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-md border border-border bg-white/5 px-2 py-1 font-mono text-xs text-muted-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Progress */}
+                {!published && (
+                  <div className="mt-6">
+                    <div className="mb-2 flex items-center justify-between">
+                      <span className="text-xs font-medium text-muted-foreground">
+                        Research Progress
+                      </span>
+
+                      <span className="font-mono text-xs text-emerald-400">
+                        {paper.progress}%
+                      </span>
+                    </div>
+
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-white/5">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${paper.progress}%` }}
+                        viewport={{ once: true }}
+                        transition={{
+                          duration: 1,
+                          ease: 'easeOut',
+                        }}
+                        className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-blue-500"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Actions */}
+                <div className="mt-auto flex flex-wrap items-center gap-3 pt-6">
+                  <a
+                    href={
+                      paper.slug === 'sentinelx'
+                        ? '/SentinelX_Research_Paper.pdf'
+                        : '#'
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      'inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-medium transition-all',
+                      paper.slug === 'sentinelx'
+                        ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/15 hover:text-emerald-300'
+                        : 'pointer-events-none border-border text-muted-foreground/50'
+                    )}
+                  >
+                    <FileText className="h-3.5 w-3.5" />
+                    Read Research Paper
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+
+                  <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground/60">
+                    <ArrowUpRight className="h-3 w-3" />
+                    Technical Research
+                  </span>
+                </div>
+              </GlassCard>
+            </motion.div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+========================================
